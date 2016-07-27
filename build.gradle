@@ -1,5 +1,12 @@
-task hello {
+task assemble {
     doLast {
-        println 'Hello world!'
+        println 'Hello, I am assembly!'
     }
 }
+
+task check {
+    doLast {
+        println 'Hello, I am check!'
+    }
+}
+
