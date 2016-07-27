@@ -1,3 +1,6 @@
+apply plugin: 'findbugs'
+//apply plugin: 'java'
+
 task assemble {
     doLast {
         println 'Hello, I am assembly!'
@@ -10,3 +13,13 @@ task check {
     }
 }
 
+findbugs {
+  ignoreFailures = true
+  sourceSets = [sourceSets.main]
+  reportsDir = file("$project.buildDir/reports/findbugs")
+  effort = "min"
+}
+
+task getHomeDir << {
+    println gradle.gradleHomeDir
+}

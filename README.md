@@ -26,11 +26,33 @@ After a branch is created, you can push as many commits to it as you want. Once 
 * Branch Management: https://git-scm.com/book/en/v2/Git-Branching-Branch-Management
 * So You Have a Mess On Your Hands (The definitive guide to fixing your oops): http://justinhileman.info/article/git-pretty/
 
+# How do I know if Travis will fail?!
+
+[Depends on: Gradle and Findbugs are installed.]
+
+1. `gradle check`
+1. `gradle assemble`
+1. `gradle test`
+1. If these pass, you should be good. CHECK THE TRAVIS BUILD TOO.
+1. If your travis build fails, get the build number from Travis and poke Mark.
+
+# Where is the travis status located?
+
+Here is our Travis homepage:
+
+https://travis-ci.com/MBLAHO13/CS-451-001-Checkers 
+
+You can watch it happen! So fun!
+
+# Intellij is complaining about Gradle.
+
+If you see a popup that says "Unlinked Gradle project" when you start Intellij, click it. Run `gradle getHomeDir` in your terminal, it should output a directory. That directory goes in the box that says "Gradle Home directory". Accept the defaults and everything should be fine.
+
 ## Planned Infrastructure
 
 * Github Issues :heavy_check_mark:
 * Github VCS :heavy_check_mark:
 * Content Requests (Provided by Github Issues) :heavy_check_mark:
-* Travis Continuous Integration :white_medium_square:
+* Travis Continuous Integration :heavy_check_mark:
 * Code Coverage Tool :white_medium_square:
 * Static Analysis Tool :white_medium_square:
