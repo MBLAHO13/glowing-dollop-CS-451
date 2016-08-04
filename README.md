@@ -10,17 +10,49 @@ A Networked Checkers Game. All documentation and no code makes Jack a Software E
 
 ## Our Work Flow
 
-We will be following a model of forks and branches. This means we each work on our own fork, and only Mark (who's managing operations) can merge to the master repo. If your git-fu fails you and everything is completely messed up, it won't affect anyone else this way, and you can always do a clean pull from master to reset everything.
+We will be following a model of forks and branches. We each work on our own fork, and only Mark (who's managing operations) can merge to the master repo. If your git-fu fails you and everything is completely messed up, it won't affect anyone else this way, and you can always do a clean pull from master to reset everything.
 
-*Please, please PLEASE do not merge your PRs to Master.* This is Mark's job, because munging the repo will just slow everyone down. Mark is the Benevolent Dictator :innocent:
+### First Steps
 
-Don't forget to set your name and email on your local machine as well! Just a nice thing to do. [Documentation on how to do that is here](https://help.github.com/articles/setting-your-email-in-git/)
+1. Click the button at the top of this repository that says "Fork". This will create your own personal fork where your (or our) git-fu failures are insulated away from the rest of the team. You'll notice the repository URL is https://github.com/**your-username**/CS-451-001-Checkers so use this information to check your commands in the following steps
+1. Clone your personal fork to your programming device (hopefully a real computer of some sort and not like a phone). On the commandline (which I'm going to assume you're using), this is `git clone https://github.com/<**YOUR USERNAME**>/CS-451-001-Checkers.git`. It may ask for credentials or other info and it's up to you to decide if/how to handle that.
+1. Add upstream as a remote target (aka you can push/pull to it). The main repository will be called "upstream" and is added to your environment using `git remote add upstream https://github.com/MBLAHO13/CS-451-001-Checkers.git` **REMEMBER, NEVER EVER EVER DO SOMETHING THAT LOOKS LIKE `push upstream`**
+1. Your evironment should now be set up and ready to use
 
-We'll also be using the branching model. This means that every discrete code chunk gets its own branch with a descriptive name. (This commit is located in the `Readme-Changes-Example` branch as an example.) 
+### Basic Flow
 
-After a branch is created, you can push as many commits to it as you want. Once you're satisfied with it, and Travis (or a similar unit tester) is reporting success, create your pull request. ([Github Documentation](https://help.github.com/articles/using-pull-requests/)) Once someone else in the group looks over the changes and says it's good, the PR will be merged into master by Mark. **All PRs must be peer-reviewed before merging, with at least one other person looking at the code and saying it's good. This ensures we don't produce :hankey:!** For an example of this, check the PR request for `Readme-Changes-Example`, which is #1 .
+I'm assuming some special cases here, chances are you can skip some of these steps (but they're all harmless in any case if you do a step you didn't have to).
 
-# Links to look at:
+1. Ensure you're up to date with upstream/master
+	1. Checkout master: `git checkout master`
+	1. Pull upstream: `git pull upstream master`
+	1. Update your fork: `git push origin master`
+1. Put yourself on a branch other than master
+	1. If you need to make a new branch
+		1. Create a branch: `git branch <name-of-branch>`. *Please use dashes instead of spaces because we're working on the commandline and nobody wants to re-learn why bash and quotes don't mix*
+		1. Checkout that branch: `git checkout <name-of-branch>`
+	1. If the branch already exists:
+		1. Checkout that branch: `git checkout <name-of-branch>`
+		1. Make sure you're up to date: `git rebase master`
+		1. If the rebase said anything other than "`Current branch <name-of-branch> is up to date.`" then push to your fork: `git push origin <name-of-branch>`
+		1. If git complains about something (just trust me on this one): `git push origin <name-of-branch> -f`
+1. Actual coding work!
+	1. Write some code until you feel the need to commit (remember this is all local to you, so commit as often as possible because it won't affect anyone else)
+	1. Stage your changes: `git add -A`
+	1. Commit your changes: `git commit -m "some useful commit message"`
+	1. Push your changes: `git push origin <name-of-branch>`
+	1. Keep on coding until you've completed somethng big enough that other people need to look at it
+1. PR: Pull Request / Peer Review
+	1. If you made way too many commits and it's confusing use `git rebase -i HEAD~20`. Be careful because you're rewriting history a bit here and can ruin your fork very quickly. Use `git log` to check that the result makes sense
+	1. When you're ready for review, log onto [GitHub](https://github.com/) (hint: you're probably already here)
+	1. Go to the [upstream project page](https://github.com/MBLAHO13/CS-451-001-Checkers)
+	1. You should see a button at the top with your branch saying "Compare & Pull Request". Click that
+	1. Create a pull request with information about your commit. Please add in-line comments if things are confusing (though that should warrant code comments anyway)
+	1. If/when it's set up, CI should automatically test your PR and reject you if it's failing the tests
+	1. If you need to change something, you should still be able to push to that same branch in your fork and the PR will update, and CI should re-test your new code.
+	1. When you have a :+1: from two other group members, merge the PR by clicking the button at the bottom of the page.
+
+# Mark's list of Links to look at:
 
 * What the hell is git?! : https://rogerdudler.github.io/git-guide/
 * Branch Management: https://git-scm.com/book/en/v2/Git-Branching-Branch-Management

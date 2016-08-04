@@ -15,7 +15,7 @@ task check {
 
 findbugs {
   ignoreFailures = true
-  sourceSets = [sourceSets.main]
+//  sourceSets = [sourceSets.main]
   reportsDir = file("$project.buildDir/reports/findbugs")
   effort = "min"
 }
