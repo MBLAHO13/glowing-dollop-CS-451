@@ -2,11 +2,12 @@ package network;
 
 import network.messages.Packet;
 
+import javax.net.ssl.SSLSocket;
+import javax.net.ssl.SSLSocketFactory;
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
 import java.io.PrintWriter;
-import java.net.Socket;
 import java.util.function.Consumer;
 
 /**
@@ -25,11 +26,17 @@ public class ClientThread extends Thread {
 
     @Override
     public void run() {
-        Socket socket = null;
+        //System.setProperty("javax.net.debug", "ssl");
+        System.setProperty("javax.net.ssl.trustStore", "client.jks");
+        System.setProperty("javax.net.ssl.trustStorePassword", "checkers");
+        SSLSocket socket = null;
         BufferedReader in = null;
         PrintWriter out = null;
+        SSLSocketFactory sslFact =
+                (SSLSocketFactory) SSLSocketFactory.getDefault();
         try {
-            socket = new Socket(SERVER_HOSTNAME, SERVER_PORT);
+            socket = (SSLSocket) sslFact.createSocket(SERVER_HOSTNAME, SERVER_PORT);
+            socket.setEnabledCipherSuites(new String[]{"TLS_RSA_WITH_AES_128_CBC_SHA", "TLS_RSA_WITH_AES_256_CBC_SHA"});
             in = new BufferedReader(new InputStreamReader(socket.getInputStream()));
             out = new PrintWriter(socket.getOutputStream(), true);
             out.write(data + "\n");
